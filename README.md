@@ -17,3 +17,4 @@ More data engineering was done on the downloaded dataset to breakit down into tr
 | Tata Safari      | 441   | 67         | 39   | 547   |
 | Toyota Innova    | 775   | 122        | 68   | 965   |
 
+## How to reproduce project
