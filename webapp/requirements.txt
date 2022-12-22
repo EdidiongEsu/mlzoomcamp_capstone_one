@@ -4,4 +4,4 @@ numpy==1.23.4
 pandas==1.4.4
 Pillow==9.3.0
 streamlit==1.9.0
-tflite_runtime==2.5.0.post1
+tflite_runtime==2.5.0
