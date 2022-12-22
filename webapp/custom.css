@@ -26,12 +26,9 @@ h1 {
     text-align: center;
 }
 
-h3 {
-    color: #000;
-}
 
 p {
-    color: #000;
+    color: white;
 }
 
 /*
@@ -40,7 +37,7 @@ p {
   ----------------------
   */
 .stButton>button {
-    background-color: rgb(75, 93, 164);
+    background-color: rgb(162, 164, 75);
     color: #000;
     border-style: none;
     z-index: 4;
@@ -54,7 +51,7 @@ p {
 
 
 .stTextInput {
-    color: #000000;
+    color: white;
 }
 
 .stTextInput>div>div>input {

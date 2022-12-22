@@ -1,45 +1,63 @@
+import tflite_runtime.interpreter as tflite
+# from tensorflow import keras
+from keras_image_helper import create_preprocessor
+
+
 import streamlit as st
 import pandas as pd
-from keras_image_helper import create_preprocessor
-import tensorflow.lite as tflite
+from PIL import Image
+import matplotlib.pyplot as plt
+import numpy as np
+import time
 
-
-import tflite_runtime.interpreter as tflite
-
-# st.set_page_config(layout="wide")
 
 with open("custom.css") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 st.title('Car Image Prediction service')
-st.header(
-    "Welcome to this web application that classifies Cars. There are six classes of Cars- [Audi',Hyundai Creta',Mahindra Scorpio',Rolls Royce',Swift',Tata Safari, Toyota Innova]")
+st.markdown(
+    " Welcome to this simple web application that classifies Cars. There are six classes of Cars - Audi, Hyundai Creta, Mahindra Scorpio, Rolls Royce, Swift , Tata Safari, Toyota Innova to choose from.")
+st.markdown("<div style='text-align: center; color: rgb(162, 164, 75);'>Choose a car image from the above classes and have some fun! 🚗</div>",
+            unsafe_allow_html=True)
 
 
-df = pd.DataFrame({
-    'first column': [1, 2, 3, 4],
-    'second column': [10, 20, 30, 40]
-})
+# path = 'Dataset/test/Hyundai Creta/88.jpg'
 
-df
+fig = plt.figure()
 
-def predict(image):
-    classifier_model = "car-model.tflite"
-    target_size = (299, 299)
-    
-    interpreter = tflite.Interpreter(model_path= classifier_model)
+
+def predict(file_uploaded):
+    with Image.open(file_uploaded) as img:
+        img = img.resize((299, 299), Image.Resampling.NEAREST)
+
+    # Load the model
+    interpreter = tflite.Interpreter(model_path='../car-model.tflite')
+    # takes the weight of model to the interpreter
     interpreter.allocate_tensors()
 
+    # input into keras
     input_index = interpreter.get_input_details()[0]['index']
+
+    # output for Keras
     output_index = interpreter.get_output_details()[0]['index']
 
-    preprocessor = create_preprocessor('xception', target_size=target_size)
+    # from keras
+    def preprocess_input(x):
+        x /= 127.5
+        x -= 1.
+        return x
 
-    path = 'Dataset/test/Hyundai Creta/88.jpg'
-    X = preprocessor.from_path(path)
+    x = np.array(img, dtype='float32')
+    X = np.array([x])
 
+    X = preprocess_input(X)
+
+    ## input is initialized
     interpreter.set_tensor(input_index, X)
+
+    # invoke all the configurations in the neural network
     interpreter.invoke()
+
     preds = interpreter.get_tensor(output_index)
 
     classes = [
@@ -52,4 +70,38 @@ def predict(image):
         'Toyota Innova'
     ]
 
-    dict(zip(classes, preds[0]))
+    results = dict(zip(classes, preds[0]))
+    max_result_key = max(results, key=results.get)
+
+    print(results)
+    result_message = f"Your uploaded Car Image is {max_result_key}"
+    return results, result_message
+
+
+# predict(path=path)
+
+def main():
+    file_uploaded = st.file_uploader(
+        "Choose File", type=["png", "jpg", "jpeg"])
+    class_btn = st.button("Classify")
+    if file_uploaded is not None:
+        image = Image.open(file_uploaded)
+        st.image(image, caption='Uploaded Image', use_column_width=True)
+
+    if class_btn:
+        if file_uploaded is None:
+            st.write("Invalid command, please upload an image")
+        else:
+            with st.spinner('Model working....'):
+                plt.imshow(image)
+                plt.axis("off")
+                predictions, result_message = predict(file_uploaded)
+                time.sleep(1)
+                st.success('Classified')
+                st.write(predictions)
+                st.write(result_message)
+                st.pyplot(fig)
+
+
+if __name__ == "__main__":
+    main()
