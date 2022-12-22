@@ -1,10 +1,7 @@
-keras==2.10.0
 keras_image_helper==0.0.1
-Keras_Preprocessing==1.1.2
 matplotlib==3.5.2
 numpy==1.23.4
 pandas==1.4.4
 Pillow==9.3.0
 streamlit==1.9.0
-tensorflow==2.10.1
 tflite_runtime==2.5.0.post1
