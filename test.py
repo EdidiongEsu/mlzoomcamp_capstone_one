@@ -1,5 +1,5 @@
 from keras_image_helper import create_preprocessor
-import tflite_runtime.interpreter as tflite
+import tensorflow.lite as tflite
 
 path = 'Dataset/test/Hyundai Creta/88.jpg'
 

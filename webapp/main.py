@@ -1,4 +1,5 @@
-import tflite_runtime.interpreter as tflite
+import tensorflow.lite as tflite
+##import tflite_runtime.interpreter as tflite
 # from tensorflow import keras
 from keras_image_helper import create_preprocessor
 
@@ -73,7 +74,6 @@ def predict(file_uploaded):
     results = dict(zip(classes, preds[0]))
     max_result_key = max(results, key=results.get)
 
-    print(results)
     result_message = f"Your uploaded Car Image is {max_result_key}"
     return results, result_message
 
