@@ -14,10 +14,10 @@ import os
 
 ## get path of css
 path = os.path.dirname(__file__)
-my_file = path +'/custom.css'
+my_file = path + '/custom.css'
 
 
-with open("custom.css") as f:
+with open(my_file) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 st.title('Car Image Prediction service')
