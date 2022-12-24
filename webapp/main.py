@@ -10,6 +10,11 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import numpy as np
 import time
+import os
+
+## get path of css
+path = os.path.dirname(__file__)
+my_file = path +'/custom.css'
 
 
 with open("custom.css") as f:
