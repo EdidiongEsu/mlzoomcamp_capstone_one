@@ -16,10 +16,10 @@ import os
 path = os.path.dirname(__file__)
 
 ## get path of css
-css_path = path + '/custom.css'
+css_path = path + '/css/custom.css'
 
 ## get path of model
-model_path = path + '../car-model.tflite'
+model_path = path + '/car-model.tflite'
 
 with open(css_path) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
@@ -31,7 +31,6 @@ st.markdown("<div style='text-align: center; color: rgb(162, 164, 75);'>Choose a
             unsafe_allow_html=True)
 
 
-# path = 'Dataset/test/Hyundai Creta/88.jpg'
 
 fig = plt.figure()
 
