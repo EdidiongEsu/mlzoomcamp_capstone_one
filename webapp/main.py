@@ -12,12 +12,16 @@ import numpy as np
 import time
 import os
 
-## get path of css
+
 path = os.path.dirname(__file__)
-my_file = path + '/custom.css'
 
+## get path of css
+css_path = path + '/custom.css'
 
-with open(my_file) as f:
+## get path of model
+model_path = path + '../car-model.tflite'
+
+with open(css_path) as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 st.title('Car Image Prediction service')
@@ -37,7 +41,7 @@ def predict(file_uploaded):
         img = img.resize((299, 299), Image.Resampling.NEAREST)
 
     # Load the model
-    interpreter = tflite.Interpreter(model_path='../car-model.tflite')
+    interpreter = tflite.Interpreter(model_path=model_path)
     # takes the weight of model to the interpreter
     interpreter.allocate_tensors()
 
