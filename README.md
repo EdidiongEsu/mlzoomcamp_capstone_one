@@ -17,4 +17,27 @@ More data engineering was done on the downloaded dataset to breakit down into tr
 | Tata Safari      | 441   | 67         | 39   | 547   |
 | Toyota Innova    | 775   | 122        | 68   | 965   |
 
+
+## Aim
+
+## Result
+An interactive car image prediction service where pictures can be uploaded and classified. It can be viewed here:
+    https://edidiongesu-mlzoomcamp-capstone-one-main-app-6b2cid.streamlit.app/
+
+Here is the interface:
+    ![](images/webapp2.png)
+
+Upload an image and predict for results:
+    ![](images/webapp3.png)
+
+## Files in repo
+
 ## How to reproduce project
+To quickly run project:
+- Create a new Virtual environment in your machine (Recommended)
+- Download/clone repository.
+- Install requirements.text file by running `pip install -r requirements.txt`
+- run `python test.py` in main driectory. You should a result ouput in terminal that looks like:
+            ![](images\test-screenshot.png)
+
+
