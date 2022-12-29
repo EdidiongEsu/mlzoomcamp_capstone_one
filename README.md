@@ -25,9 +25,12 @@ An interactive car image prediction service where pictures can be uploaded and c
     https://edidiongesu-mlzoomcamp-capstone-one-main-app-6b2cid.streamlit.app/
 
 Here is the interface:
+    ![](images/webapp.png)
+
+Upload an image:
     ![](images/webapp2.png)
 
-Upload an image and predict for results:
+Classify the car image:
     ![](images/webapp3.png)
 
 ## Files in repo
