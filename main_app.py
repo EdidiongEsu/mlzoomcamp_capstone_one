@@ -80,10 +80,15 @@ def predict(file_uploaded):
     ]
 
     results = dict(zip(classes, preds[0]))
+    df = pd.DataFrame.from_dict(results, orient='index' , columns=["prediction"])
+    df['prediction'] = df['prediction'].astype(float)
+    df.sort_values(by="prediction" , ascending=False , inplace=True)
+    df['prediction_percentage'] = df['prediction'] .apply(lambda results : "{:.2f} %".format(results))
+
     max_result_key = max(results, key=results.get)
 
     result_message = f"Your uploaded Car Image is {max_result_key}"
-    return results, result_message
+    return df, result_message
 
 
 # predict(path=path)
@@ -103,10 +108,10 @@ def main():
             with st.spinner('Model working....'):
                 plt.imshow(image)
                 plt.axis("off")
-                predictions, result_message = predict(file_uploaded)
+                df, result_message = predict(file_uploaded)
                 time.sleep(1)
                 st.success('Classified')
-                st.write(predictions)
+                st.dataframe(df.style.highlight_max(color='green', axis=0))
                 st.write(result_message)
                 st.pyplot(fig)
 
