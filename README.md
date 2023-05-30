@@ -23,7 +23,7 @@ To train and build an interactive model that can successfully predict seven clas
 
 ## Result
 An interactive car image prediction service where pictures can be uploaded and classified. It can be viewed here:
-    https://edidiongesu-mlzoomcamp-capstone-one-main-app-6b2cid.streamlit.app/
+    https://edidiongesu-mlzoomcamp-capstone-one-main-app-uy4dzl.streamlit.app/
 
 Here is the interface:
     ![](images/webapp.png)
