@@ -111,7 +111,7 @@ def main():
                 df, result_message = predict(file_uploaded)
                 time.sleep(1)
                 st.success('Classified')
-                st.dataframe(df.style.highlight_max(color='green', axis=0))
+                st.dataframe(df.style.highlight_max(color='green', axis=0, subset=["prediction"]))
                 st.write(result_message)
                 st.pyplot(fig)
 
